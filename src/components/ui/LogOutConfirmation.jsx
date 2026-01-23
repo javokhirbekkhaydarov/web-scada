@@ -7,7 +7,7 @@ export const LogOutConfirmation = ({ title, isOpen, onClose , onConfirm}) => {
 
   return (
     <MuiDialog aria-labelledby='dialog-title' open={isOpen} onClose={() => onClose()}>
-      <div className='p-6 max-w-[400px] public-sans'>
+      <div className='p-6 min-w-80 max-w-[400px] public-sans'>
         <div className='flex items-center justify-between mb-6'>
           <h4 className={'font-normal'}>{title}</h4>
           <span className='text-main-500 hover:cursor-pointer' onClick={() => onClose()}>
