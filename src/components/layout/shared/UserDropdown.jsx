@@ -4,7 +4,7 @@
 import { useRef, useState } from 'react'
 
 // Next Imports
-import { useRouter , usePathname} from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 // MUI Imports
 import { styled } from '@mui/material/styles'
@@ -21,7 +21,9 @@ import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
 
 // Hook Imports
+
 import { useSettings } from '@core/hooks/useSettings'
+import { LogOutConfirmation } from '@components/ui/LogOutConfirmation.jsx'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
@@ -38,6 +40,7 @@ const UserDropdown = () => {
 
   // States
   const [open, setOpen] = useState(false)
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false)
 
   // Refs
   const anchorRef = useRef(null)
@@ -62,16 +65,23 @@ const UserDropdown = () => {
     setOpen(false)
   }
 
-
-  const handleUserLogout = async () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.setItem('lastVisitedPage', pathname)
-
-    router.push('/login');
+  const handleLogoutClick = () => {
+    setOpen(false)
+    setLogoutModalOpen(true)
   }
 
+  const handleUserLogout = async () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+    localStorage.setItem('lastVisitedPage', pathname)
 
+    setLogoutModalOpen(false)
+    router.push('/login')
+  }
+
+  const handleCloseLogoutModal = () => {
+    setLogoutModalOpen(false)
+  }
 
   return (
     <>
@@ -112,7 +122,7 @@ const UserDropdown = () => {
                     <Avatar alt='John Doe' src='/images/avatars/1.png' />
                     <div className='flex flex-col items-start'>
                       <Typography className='font-medium' color='text.primary'>
-                   Javohirbek
+                        Javohirbek
                       </Typography>
                       <Typography variant='caption'>westdev@gmail.com</Typography>
                     </div>
@@ -126,14 +136,6 @@ const UserDropdown = () => {
                     <i className='tabler-settings' />
                     <Typography color='text.primary'>Settings</Typography>
                   </MenuItem>
-                  {/*<MenuItem className='gap-3 mli-2' onClick={e => handleDropdownClose(e)}>*/}
-                  {/*  <i className='tabler-currency-dollar' />*/}
-                  {/*  <Typography color='text.primary'>Pricing</Typography>*/}
-                  {/*</MenuItem>*/}
-                  {/*<MenuItem className='gap-3 mli-2' onClick={e => handleDropdownClose(e)}>*/}
-                  {/*  <i className='tabler-help-circle' />*/}
-                  {/*  <Typography color='text.primary'>FAQ</Typography>*/}
-                  {/*</MenuItem>*/}
                   <div className='flex items-center plb-2 pli-3'>
                     <Button
                       fullWidth
@@ -141,7 +143,7 @@ const UserDropdown = () => {
                       color='error'
                       size='small'
                       endIcon={<i className='tabler-logout' />}
-                      onClick={handleUserLogout}
+                      onClick={handleLogoutClick}
                       sx={{ '& .MuiButton-endIcon': { marginInlineStart: 1.5 } }}
                     >
                       Logout
@@ -153,6 +155,7 @@ const UserDropdown = () => {
           </Fade>
         )}
       </Popper>
+      <LogOutConfirmation isOpen={logoutModalOpen} title={'Вы вышли из системы?'} onClose={handleCloseLogoutModal} onConfirm={handleUserLogout} />
     </>
   )
 }
