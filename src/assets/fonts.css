@@ -1,0 +1,36 @@
+@font-face {
+  src: url('../assets/fonts/inter/Inter-Regular.ttf');
+  font-family: 'Inter';
+  font-weight: 400;
+}
+@font-face {
+  src: url('../assets/fonts/inter/Inter-Medium.ttf');
+  font-family: 'Inter';
+  font-weight: 500;
+}
+@font-face {
+  src: url('../assets/fonts/inter/Inter-Bold.ttf');
+  font-family: 'Inter';
+  font-weight: 700;
+}
+
+.public-sans {
+  font-family: 'Inter', serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+.open-sans {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400 !important;
+  font-style: normal;
+}
+* {
+  font-family: 'Inter', sans-serif !important;
+}
+
+.add_article_keyword .MuiFormHelperText-root {
+  position: absolute;
+  bottom: -15px;
+}

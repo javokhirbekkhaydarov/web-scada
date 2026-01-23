@@ -1,0 +1,370 @@
+@import '../assets/fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'leaflet/dist/leaflet.css';
+
+:root {
+  --border-radius: var(--mui-shape-borderRadius);
+  --border-color: var(--mui-palette-divider);
+  --primary-color: var(--mui-palette-primary-main);
+  --background-color: var(--mui-palette-background-default);
+  --background-color-rgb: var(--mui-palette-background-paperChannel);
+  --header-height: 54px;
+  --header-z-index: var(--mui-zIndex-appBar);
+  --footer-z-index: 10;
+  --customizer-z-index: var(--mui-zIndex-drawer);
+  --search-z-index: var(--mui-zIndex-tooltip);
+  --drawer-z-index: var(--mui-zIndex-drawer);
+  --backdrop-color: rgb(var(--mui-mainColorChannels-light) / 0.5);
+  --mui-mainColorChannels-shadow: var(--mui-mainColorChannels-lightShadow);
+}
+
+[data-mui-color-scheme='dark'] {
+  --backdrop-color: rgb(23 25 37 / 0.6);
+  --mui-mainColorChannels-shadow: var(--mui-mainColorChannels-darkShadow);
+}
+
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
+  border-style: solid;
+  border-color: theme('borderColor.DEFAULT', currentColor);
+}
+
+html {
+  display: flex;
+  inline-size: 100%;
+  min-block-size: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul:not([class]) {
+  margin-block: 1rem;
+  padding-inline-start: 40px;
+}
+
+/*! Do not remove the following styles */
+/*
+  Fix the popout / submenu closing issue when using hover trigger to open the menu and using
+  perfectscrollbar where the bridge create with safe polygon by floating ui was not working
+*/
+[data-floating-ui-safe-polygon] .scrollbar-container {
+  pointer-events: auto;
+}
+
+[data-floating-ui-safe-polygon] .scrollbar-container .ps__rail-y {
+  pointer-events: none;
+}
+
+.ps__rail-y {
+  inset-inline-end: 0 !important;
+  inset-inline-start: auto !important;
+
+  & .ps__thumb-y {
+    inset-inline-end: 3px !important;
+    inset-inline-start: auto !important;
+    background-color: var(--mui-palette-divider);
+    inline-size: 6px;
+
+    &:hover,
+    &:focus,
+    &.ps--clicking {
+      background-color: var(--mui-palette-action-disabled) !important;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.ps--clicking {
+    background-color: var(--mui-palette-action-hover) !important;
+  }
+
+  &:hover,
+  &:focus,
+  &.ps--clicking {
+    .ps__thumb-y {
+      background-color: var(--mui-palette-action-disabled) !important;
+    }
+  }
+}
+
+.ts-vertical-nav-root {
+  .ps__thumb-y {
+    inline-size: 4px;
+
+    &:hover,
+    &:focus,
+    &.ps--clicking {
+      inline-size: 6px;
+    }
+  }
+
+  .ps__rail-y {
+    inline-size: 10px;
+
+    &:hover,
+    &:focus,
+    &.ps--clicking {
+      background-color: transparent !important;
+
+      .ps__thumb-y {
+        inline-size: 6px;
+      }
+    }
+  }
+}
+
+:where([class^='tabler-']) {
+  font-size: 1.5rem;
+}
+
+/* Fix width issue for the input-otp component */
+input[autocomplete='one-time-code'][data-input-otp='true'] {
+  inline-size: 100% !important;
+}
+.article_sticky {
+  position: sticky;
+  inset-block-start: 100px;
+  z-index: 9 !important;
+  transform: translateY(-30px);
+}
+[data-mui-color-scheme='light'] .add_article_parent {
+  background: #f8f7fa;
+}
+[data-mui-color-scheme='light'] .close_dialog {
+  background: #fff;
+}
+[data-mui-color-scheme='light'] .check_input {
+  color: #2f2b3de5;
+}
+[data-mui-color-scheme='dark'] .check_input {
+  color: #e1def5e5;
+}
+[data-mui-color-scheme='dark'] .close_dialog {
+  background: #2f3349;
+}
+[data-mui-color-scheme='dark'] .add_article_parent {
+  background: #25293c;
+}
+.article_datepicker .mui-1lwsmyc {
+  display: flex;
+  justify-content: center;
+  box-shadow: none !important;
+}
+.article_datepicker .mui-1lwsmyc .react-datepicker {
+  box-shadow: none !important;
+}
+.article_datepicker .MuiBox-root .mui-1lwsmyc > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none !important;
+}
+.custom_border {
+  border-width: 1px !important;
+}
+.custom_border:hover {
+  border-color: var(--primary-color) #675dd8;
+}
+.plus_icon div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close_dialog div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card {
+  /*display: grid;*/
+  /*grid-template-columns: 2fr auto auto auto 1fr;*/
+  overflow-x: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.review-card {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;
+  overflow-x: auto;
+}
+code {
+  font-family: inherit;
+  padding-block: 2px;
+  padding-inline: 4px;
+  border-radius: 4px;
+  font-size: 90%;
+  color: var(--mui-palette-info-main);
+  background-color: rgb(var(--mui-palette-info-mainChannel) / 0.08);
+  border: 0;
+}
+
+.adding .mui-lg4s9l-MuiFormControl-root-MuiTextField-root .MuiInputBase-root.MuiInputBase-sizeSmall {
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+
+  block-size: 36px !important;
+}
+
+.shadow-c:hover {
+  box-shadow: 0px 2px 6px rgb(115 103 240 / 0.3);
+  border: 2px solid #7367f0 !important;
+}
+
+.limit1 {
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+  display: none !important;
+}
+
+.leaflet-marker-icon {
+  border-radius: 50% !important;
+}
+
+.map-w {
+  min-inline-size: calc(100vw - 80px) !important;
+  min-block-size: calc(100vh - 160px) !important;
+}
+
+.mui-avpbka-MuiPaper-root-MuiDialog-paper {
+  max-inline-size: 100vw !important;
+}
+
+.leaflet-container {
+  block-size: calc(100vh - 160px) !important;
+}
+
+.poisk .mui-1gvsucl-MuiCardContent-root:last-child,
+.poisk .mui-1gvsucl-MuiCardContent-root:last-child,
+.poisk .mui-1gvsucl-MuiCardContent-root {
+  padding-block-end: 0 !important;
+  padding: 0 !important;
+}
+
+.h-address {
+  block-size: calc(100vh - 160px);
+}
+
+/* Custom scrollbar styles for .custom-scroll class */
+.custom-scroll::-webkit-scrollbar {
+  inline-size: 5px;
+}
+
+/* Scrollbar track */
+.custom-scroll::-webkit-scrollbar-track {
+  inline-size: 10px;
+  background: #c7c2f9;
+  /* White color */
+}
+
+/* Scrollbar thumb */
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #675dd8;
+  /* Example info color */
+  border-radius: 4px;
+}
+
+/* Scrollbar thumb on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #675dd8;
+  /* Example primary color */
+}
+
+.search-results,
+.search-result {
+  user-select: none !important;
+  /* Prevents map dragging during text selection */
+}
+
+.ant-popover {
+  max-inline-size: 300px !important;
+}
+
+.ant-popover .ant-popover-inner,
+.ant-popover .ant-popover-arrow::after {
+  background-color: #00bad1 !important;
+}
+
+.ant-popover .ant-popover-title,
+.ant-popover .ant-popover-inner-content {
+  color: #fff !important;
+}
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.mui-accz5s-MuiAutocomplete-root .MuiAutocomplete-tag {
+  margin: 0 !important;
+}
+
+.MuiChip-root {
+  padding-inline-start: 4px !important;
+}
+.filter_grid {
+  display: flex;
+  /* grid-template-columns: 1fr 2fr 2fr 3fr 2fr 0.5fr !important; */
+  /*grid-template-columns: auto auto auto auto auto auto !important;*/
+  /*grid-template-columns: 1fr 1fr 1fr 2fr 1fr auto !important;*/
+}
+
+::-webkit-scrollbar {
+  inline-size: 5px;
+}
+
+::-webkit-scrollbar-track {
+  inline-size: 10px;
+  background: #c7c2f9;
+  /* White color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #675dd8;
+  /* Example info color */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #675dd8;
+  /* Example primary color */
+}
+
+/* Draw Mode Styles */
+.draw-mode-indicator {
+  background: transparent !important;
+  border: none !important;
+}
+
+.draw-mode-indicator div {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  white-space: nowrap;
+}
