@@ -14,6 +14,27 @@
   font-weight: 700;
 }
 
+@font-face {
+  src: url('../assets/fonts/scada/Scada-Regular.ttf');
+  font-family: 'Scada';
+  font-weight: 400;
+}
+@font-face {
+  src: url('../assets/fonts/scada/Scada-Regular.ttf');
+  font-family: 'Sscada';
+  font-weight: 500;
+}
+@font-face {
+  src: url('../assets/fonts/scada/Scada-Bold.ttf');
+  font-family: 'Scada';
+  font-weight: 700;
+}
+@font-face {
+  src: url('../assets/fonts/seven/segment.ttf');
+  font-family: 'Seven';
+  font-weight: 500;
+}
+
 .public-sans {
   font-family: 'Inter', serif;
   font-optical-sizing: auto;
@@ -27,7 +48,14 @@
   font-style: normal;
 }
 * {
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Inter', sans-serif ;
+}
+.font-scada{
+  font-family: 'Scada', sans-serif !important;
+
+}
+.font-seven{
+  font-family: 'Seven', sans-serif !important;
 }
 
 .add_article_keyword .MuiFormHelperText-root {

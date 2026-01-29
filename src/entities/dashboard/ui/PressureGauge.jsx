@@ -41,31 +41,27 @@ export const PressureGauge = () => {
           {/* Dinamik raqam */}
           <text
             x='768'
-            y='326'
-            fontSize='70'
+            y='340'
+            fontSize='110'
             fontWeight='700'
             textAnchor='middle'
             dominantBaseline='middle'
-
             fill={getPressureColor(pressure)}
-            fontFamily='Inter, sans-serif'
+            fontFamily='Scada, sans-serif'
+            className={'font-seven'}
             style={{ transition: 'fill 0.3s ease' }}
           >
             {pressure.toFixed(2)}
           </text>
 
-          <text   fontStyle={'italic'} x='850' y='384' fontSize='32' fill='#4b5563' fontFamily='Arial, sans-serif' fontWeight='500'>
+          <text   fontStyle={'italic'} x='850' y='384' fontSize='32' fill='#4b5563' fontFamily='Scada, sans-serif' className={'font-scada'} fontWeight='500'>
             bar
           </text>
         </svg>
       </div>
 
       <div className='space-y-4'>
-        <div className='flex items-center justify-between'>
-          <span className='text-2xl font-bold' style={{ color: getPressureColor(pressure) }}>
-            {pressure.toFixed(2)} bar
-          </span>
-        </div>
+
 
         <input
           type='range'
