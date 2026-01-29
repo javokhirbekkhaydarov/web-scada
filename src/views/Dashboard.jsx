@@ -1,9 +1,9 @@
 'use client'
 
 import Icon from '@/components/icon/Icon'
+import { PressureGauge } from '@/entities/dashboard/ui/PressureGauge.jsx'
 
 const Dashboard = () => {
-
   return (
     <div className='flex flex-col gap-6'>
       {/* <div className='text-[#FF9F43] text-sm flex items-center gap-2 px-2 py-5 bg-[#FF9F4314] rounded-lg'>*/}
@@ -17,8 +17,7 @@ const Dashboard = () => {
           <Icon type='info' width='24' />
         </div>
       </div>
-
-
+      <PressureGauge />
     </div>
   )
 }
