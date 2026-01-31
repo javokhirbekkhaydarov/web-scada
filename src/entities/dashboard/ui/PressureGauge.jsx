@@ -61,8 +61,6 @@ export const PressureGauge = () => {
       </div>
 
       <div className='space-y-4'>
-
-
         <input
           type='range'
           min='0'

@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 
 import { authEvents } from '@/utils/events'
 
-const publicRoutes = ['/login', '/register', '/forgot-password']
+const publicRoutes = ['/auth/login', '/auth/register', '/auth/forgot-password']
 
 export default function AuthWrapper({ children }) {
   const router = useRouter()
@@ -20,18 +20,18 @@ export default function AuthWrapper({ children }) {
 
       if (!token && !publicRoutes.includes(pathname)) {
         localStorage.setItem('lastVisitedPage', pathname)
-        router.push('/login')
+        router.push('/auth/login')
       }
     }
 
     checkAuth()
 
     const unsubscribe = authEvents.subscribe(() => {
-      if (pathname !== '/login') {
+      if (pathname !== '/auth/login') {
         localStorage.setItem('lastVisitedPage', pathname)
       }
 
-      router.push('/login')
+      router.push('/auth/login')
     })
 
     return () => {

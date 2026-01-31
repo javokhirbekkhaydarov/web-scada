@@ -22,19 +22,19 @@ import Divider from '@mui/material/Divider'
 // Third-party Imports
 import classnames from 'classnames'
 
-import { api } from '@/utils/api'
+import { api } from '@/utils/api.js'
 
 // Component Imports
-import Link from '@components/Link'
-import Logo from '@components/layout/shared/Logo'
-import CustomTextField from '@core/components/mui/TextField'
+import Link from '@components/Link.jsx'
+import Logo from '@components/layout/shared/Logo.jsx'
+import CustomTextField from '@core/components/mui/TextField.jsx'
 
 // Config Imports
-import themeConfig from '@configs/themeConfig'
+import themeConfig from '@configs/themeConfig.js'
 
 // Hook Imports
-import { useImageVariant } from '@core/hooks/useImageVariant'
-import { useSettings } from '@core/hooks/useSettings'
+import { useImageVariant } from '@core/hooks/useImageVariant.js'
+import { useSettings } from '@core/hooks/useSettings.jsx'
 
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -60,7 +60,7 @@ const MaskImg = styled('img')({
   zIndex: -1
 })
 
-const LoginV2 = ({ mode }) => {
+const ForgotPasswordPage = ({ mode }) => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -161,8 +161,7 @@ const LoginV2 = ({ mode }) => {
         </div>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
           <div className='flex flex-col gap-1'>
-            <Typography variant='h4'>{`  ${themeConfig.templateName} ga xush kelibsiz!`}</Typography>
-            <Typography>Boshlash uchun tizimga kiring</Typography>
+            <Typography variant={'h4'}>Parolni tiklash</Typography>
           </div>
           <form noValidate autoComplete='off' onSubmit={handleLogin} className='flex flex-col gap-5'>
             <CustomTextField
@@ -173,48 +172,22 @@ const LoginV2 = ({ mode }) => {
               onChange={e => setUsername(e.target.value)}
               placeholder='+998 99 999 99 99'
             />
-            <CustomTextField
-              fullWidth
-              label='Parol'
-              placeholder='············'
-              id='outlined-adornment-password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              type={isPasswordShown ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
-                      <i className={isPasswordShown ? 'tabler-eye-off' : 'tabler-eye'} />
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />
+
 
             <Button fullWidth variant='contained' type='submit' disabled={loading || (!username && !password)}>
-              Kirish
+           Kodni olish
             </Button>
           </form>
-          <div className='flex flex-col items-start justify-start gap-1'>
-            <p>
-              Akkauntingiz yo‘qmi?{' '}
-              <Link href="/auth/register" className="underline text-primary">
-                Ro‘yxatdan o‘ting
-              </Link>
-            </p>
-
-            <p>
-              Parolni unutdingizmi?{' '}
-              <Link href="/auth/forgot-password" className="underline text-primary">
-                Tiklash
-              </Link>
-            </p>
-          </div>
+          <p>
+            Akkauntingiz yo‘qmi?{' '}
+            <Link href="/auth/register" className="underline text-primary">
+              Ro‘yxatdan o‘ting
+            </Link>
+          </p>
         </div>
       </div>
     </div>
   )
 }
 
-export default LoginV2
+export default ForgotPasswordPage

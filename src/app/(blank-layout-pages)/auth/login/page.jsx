@@ -2,10 +2,10 @@
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Login from '@views/Login'
+import Login from '@views/Login.jsx'
 
 // Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import { getServerMode } from '@core/utils/serverHelpers.js'
 
 export const metadata = {
   title: 'Login',

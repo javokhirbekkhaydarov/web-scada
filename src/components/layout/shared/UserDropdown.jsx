@@ -76,7 +76,7 @@ const UserDropdown = () => {
     localStorage.setItem('lastVisitedPage', pathname)
 
     setLogoutModalOpen(false)
-    router.push('/login')
+    router.push('/auth/login')
   }
 
   const handleCloseLogoutModal = () => {
