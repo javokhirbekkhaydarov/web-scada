@@ -42,7 +42,7 @@ return innRegex.test(value)
   return (
     <div className='flex flex-col gap-5'>
       <div className='flex flex-col gap-1'>
-        <Typography variant='h4'>Ro'yxatdan o'tish</Typography>
+        <Typography variant='h4'>Ro&#39;yxatdan o&#39;tish</Typography>
         <Typography>INN kodingizni kiriting</Typography>
       </div>
 
