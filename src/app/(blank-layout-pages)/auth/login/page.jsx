@@ -1,6 +1,3 @@
-// Component Imports
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 import Login from '@views/Login.jsx'
 
@@ -18,7 +15,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <ToastContainer />
+
       <Login mode={mode} />
     </>
   )

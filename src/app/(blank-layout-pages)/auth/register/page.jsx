@@ -1,6 +1,3 @@
-// Component Imports
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 
 // Server Action Imports
@@ -18,7 +15,6 @@ const Register = () => {
 
   return (
     <>
-      <ToastContainer />
       <RegisterPage mode={mode} />
     </>
   )

@@ -1,8 +1,6 @@
 // MUI Imports
 import Button from '@mui/material/Button'
 
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 // Layout Imports
 import LayoutWrapper from '@layouts/LayoutWrapper'
@@ -29,7 +27,7 @@ const Layout = async ({ children }) => {
 
   return (
     <>
-      <ToastContainer />
+
       <LayoutWrapper
         systemMode={systemMode}
         verticalLayout={

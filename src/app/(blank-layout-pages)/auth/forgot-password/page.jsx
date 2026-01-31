@@ -1,7 +1,3 @@
-// Component Imports
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
 
 // Server Action Imports
 import { getServerMode } from '@core/utils/serverHelpers.js'
@@ -19,7 +15,7 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <ToastContainer />
+
       <ForgotPasswordPage mode={mode} />
     </>
   )
