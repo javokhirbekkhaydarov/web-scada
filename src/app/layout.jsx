@@ -5,6 +5,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css'
 import '@/app/globals.css'
 
 // Generated Icon CSS Imports
+import { Toaster } from 'react-hot-toast'
+
 import '@assets/iconify-icons/generated-icons.css'
 import ReduxProvider from '@components/ReduxProvider'
 
@@ -28,7 +30,30 @@ const RootLayout = ({ children }) => {
         <AuthWrapper>
           <ProgressProvider>
             <Providers direction={direction}>
-              <ReduxProvider>{children}</ReduxProvider>
+              <ReduxProvider>
+                <Toaster
+                  position='top-center'
+                  toastOptions={{
+                    duration: 4000,
+                    style: {
+                      fontSize: '14px'
+                    },
+                    success: {
+                      iconTheme: {
+                        primary: '#22c55e',
+                        secondary: '#fff'
+                      }
+                    },
+                    error: {
+                      iconTheme: {
+                        primary: '#ef4444',
+                        secondary: '#fff'
+                      }
+                    }
+                  }}
+                />
+                {children}
+              </ReduxProvider>
             </Providers>
           </ProgressProvider>
         </AuthWrapper>

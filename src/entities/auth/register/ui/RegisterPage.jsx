@@ -1,42 +1,25 @@
 'use client'
 
-// React Imports
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-// Next Imports
 import { useRouter } from 'next/navigation'
 
-import { toast } from 'react-toastify'
-
-// MUI Imports
+import { useSelector } from 'react-redux'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { styled, useTheme } from '@mui/material/styles'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import Checkbox from '@mui/material/Checkbox'
-import Button from '@mui/material/Button'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
-
-// Third-party Imports
 import classnames from 'classnames'
 
-import { api } from '@/utils/api.js'
-
-// Component Imports
 import Link from '@components/Link.jsx'
 import Logo from '@components/layout/shared/Logo.jsx'
-import CustomTextField from '@core/components/mui/TextField.jsx'
 
-// Config Imports
-import themeConfig from '@configs/themeConfig.js'
-
-// Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant.js'
 import { useSettings } from '@core/hooks/useSettings.jsx'
 
-// Styled Custom Components
+import InnStep from './InnStep'
+import PhoneStep from './PhoneStep'
+import OtpStep from './OtpStep'
+import PasswordStep from './PasswordStep'
+
 const LoginIllustration = styled('img')(({ theme }) => ({
   zIndex: 2,
   blockSize: 'auto',
@@ -61,13 +44,13 @@ const MaskImg = styled('img')({
 })
 
 const RegisterPage = ({ mode }) => {
-  // States
-  const [isPasswordShown, setIsPasswordShown] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [username, setUsername] = useState('qwer')
-  const [password, setPassword] = useState('qwer')
+  const router = useRouter()
+  const { settings } = useSettings()
+  const theme = useTheme()
+  const hidden = useMediaQuery(theme.breakpoints.down('md'))
 
-  // Vars
+  const currentStep = useSelector((state) => state.registerStore.step)
+
   const darkImg = '/images/pages/auth-mask-dark.png'
   const lightImg = '/images/pages/auth-mask-light.png'
   const darkIllustration = '/images/illustrations/auth/v2-login-dark.png'
@@ -75,11 +58,6 @@ const RegisterPage = ({ mode }) => {
   const borderedDarkIllustration = '/images/illustrations/auth/v2-login-dark-border.png'
   const borderedLightIllustration = '/images/illustrations/auth/v2-login-light-border.png'
 
-  // Hooks
-  const router = useRouter()
-  const { settings } = useSettings()
-  const theme = useTheme()
-  const hidden = useMediaQuery(theme.breakpoints.down('md'))
   const authBackground = useImageVariant(mode, lightImg, darkImg)
 
   const characterIllustration = useImageVariant(
@@ -94,45 +72,25 @@ const RegisterPage = ({ mode }) => {
     const token = localStorage.getItem('access_token')
 
     if (token) {
-      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
+      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/dashboards'
 
       router.push(lastVisitedPage)
-
-      // window.location.href = lastVisitedPage
       localStorage.removeItem('lastVisitedPage')
     }
   }, [router])
 
-  const handleClickShowPassword = () => setIsPasswordShown(show => !show)
-
-  const handleLogin = async e => {
-    e.preventDefault()
-    setLoading(true)
-
-    try {
-      const response = await api({
-        url: 'token/',
-        method: 'POST',
-        data: { username, password },
-        open: true
-      })
-
-      setLoading(false)
-
-      const { access, refresh } = response.data
-
-      localStorage.setItem('access_token', access)
-      localStorage.setItem('refresh_token', refresh)
-
-      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
-
-      router.push(lastVisitedPage)
-
-      // window.location.href = lastVisitedPage
-      localStorage.removeItem('lastVisitedPage')
-    } catch (error) {
-      setLoading(false)
-      toast.error(error)
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <InnStep />
+      case 2:
+        return <PhoneStep />
+      case 3:
+        return <OtpStep />
+      case 4:
+        return <PasswordStep />
+      default:
+        return <InnStep />
     }
   }
 
@@ -160,43 +118,10 @@ const RegisterPage = ({ mode }) => {
           <Logo />
         </div>
         <div className='flex flex-col gap-6 is-full sm:is-auto md:is-full sm:max-is-[400px] md:max-is-[unset] mbs-11 sm:mbs-14 md:mbs-0'>
-          <div className='flex flex-col gap-1'>
-            <Typography variant={'h4'}>Ishni boshlash uchun ro&#39;yxatdan o&#39;ting</Typography>
-          </div>
-          <form noValidate autoComplete='off' onSubmit={handleLogin} className='flex flex-col gap-5'>
-            <CustomTextField
-              autoFocus
-              fullWidth
-              label='Telefon raqam'
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              placeholder='+998 99 999 99 99'
-            />
-            <CustomTextField
-              fullWidth
-              label='Parol'
-              placeholder='············'
-              id='outlined-adornment-password'
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              type={isPasswordShown ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton edge='end' onClick={handleClickShowPassword} onMouseDown={e => e.preventDefault()}>
-                      <i className={isPasswordShown ? 'tabler-eye-off' : 'tabler-eye'} />
-                    </IconButton>
-                  </InputAdornment>
-                )
-              }}
-            />
+          {renderStep()}
 
-            <Button fullWidth variant='contained' type='submit' disabled={loading || (!username && !password)}>
-              Ro&#39;yxatdan o&#39;tish
-            </Button>
-          </form>
           <p>
-            Allaqachon ro&#39;yxatdan o&#39;tganmisiz ? Unda{' '}
+            Allaqachon ro&#39;yxatdan o&#39;tganmisiz? Unda{' '}
             <Link href={'/auth/login'} className={'underline text-primary'}>
               Login
             </Link>{' '}
