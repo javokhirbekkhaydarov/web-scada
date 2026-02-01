@@ -35,6 +35,7 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
+import { CircularProgress } from '@mui/material'
 
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -64,8 +65,8 @@ const LoginV2 = ({ mode }) => {
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [username, setUsername] = useState('qwer')
-  const [password, setPassword] = useState('qwer')
+  const [username, setUsername] = useState('qwer1111!')
+  const [password, setPassword] = useState('qwer1111!')
 
   // Vars
   const darkImg = '/images/pages/auth-mask-dark.png'
@@ -110,26 +111,28 @@ const LoginV2 = ({ mode }) => {
     setLoading(true)
 
     try {
-      const response = await api({
-        url: 'token/',
-        method: 'POST',
-        data: { username, password },
-        open: true
-      })
+      // const response = await api({
+      //   url: 'token/',
+      //   method: 'POST',
+      //   data: { username, password },
+      //   open: true
+      // })
+setTimeout(() => {
 
-      setLoading(false)
+  setLoading(false)
 
-      const { access, refresh } = response.data
+  const { access, refresh } = 'token'
 
-      localStorage.setItem('access_token', access)
-      localStorage.setItem('refresh_token', refresh)
+  localStorage.setItem('access_token', access)
+  localStorage.setItem('refresh_token', refresh)
 
-      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
+  const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
 
-      router.push(lastVisitedPage)
+  router.push(lastVisitedPage)
 
-      // window.location.href = lastVisitedPage
-      localStorage.removeItem('lastVisitedPage')
+  // window.location.href = lastVisitedPage
+  localStorage.removeItem('lastVisitedPage')
+},1000)
     } catch (error) {
       setLoading(false)
       toast.error(error)
@@ -192,8 +195,14 @@ const LoginV2 = ({ mode }) => {
               }}
             />
 
-            <Button fullWidth variant='contained' type='submit' disabled={loading || (!username && !password)}>
-              Kirish
+            <Button
+              fullWidth
+              variant='contained'
+              type='submit'
+              disabled={loading || (!username && !password)}
+              startIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
+            >
+              {loading ? 'Yuklanmoqda...' : 'Kirish'}
             </Button>
           </form>
           <div className='flex flex-col items-start justify-start gap-1'>

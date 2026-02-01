@@ -68,7 +68,7 @@ const VerticalMenu = ({ scrollMenu }) => {
         menuSectionStyles={menuSectionStyles(verticalNavOptions, theme)}
       >
 
-        <MenuItem href='/dashboards' icon={<i className='tabler-smart-home' />}>
+        <MenuItem href='/dashboard' icon={<i className='tabler-smart-home' />}>
           Панель
         </MenuItem>
 

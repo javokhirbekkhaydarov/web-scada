@@ -72,7 +72,7 @@ const RegisterPage = ({ mode }) => {
     const token = localStorage.getItem('access_token')
 
     if (token) {
-      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/dashboards'
+      const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/dashboard'
 
       router.push(lastVisitedPage)
       localStorage.removeItem('lastVisitedPage')

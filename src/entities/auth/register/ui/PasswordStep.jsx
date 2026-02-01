@@ -97,12 +97,21 @@ const PasswordStep = () => {
       return
     }
 
-    success('Muvaffaqiyatli ro‘yxatdan o‘tdingiz ')
 
-    // Simulate successful registration
-    localStorage.setItem('access_token', 'mock_token_' + Date.now())
+    const { access, refresh } = 'token'
+
+    localStorage.setItem('access_token', access)
+    localStorage.setItem('refresh_token', refresh)
+
+    const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
+
+    router.push(lastVisitedPage)
+
+    // window.location.href = lastVisitedPage
+    localStorage.removeItem('lastVisitedPage')
+
     dispatch(resetRegister())
-    router.push('/dashboards')
+    success('Muvaffaqiyatli ro‘yxatdan o‘tdingiz ')
   }
 
   const isValid = password && confirmPassword && !validatePassword(password) && password === confirmPassword
