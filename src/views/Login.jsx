@@ -22,6 +22,8 @@ import Divider from '@mui/material/Divider'
 // Third-party Imports
 import classnames from 'classnames'
 
+import { CircularProgress } from '@mui/material'
+
 import { api } from '@/utils/api'
 
 // Component Imports
@@ -35,7 +37,6 @@ import themeConfig from '@configs/themeConfig'
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
 import { useSettings } from '@core/hooks/useSettings'
-import { CircularProgress } from '@mui/material'
 
 // Styled Custom Components
 const LoginIllustration = styled('img')(({ theme }) => ({
@@ -117,22 +118,21 @@ const LoginV2 = ({ mode }) => {
       //   data: { username, password },
       //   open: true
       // })
-setTimeout(() => {
+      setTimeout(() => {
+        setLoading(false)
 
-  setLoading(false)
+        const { access, refresh } = 'token'
 
-  const { access, refresh } = 'token'
+        localStorage.setItem('access_token', access)
+        localStorage.setItem('refresh_token', refresh)
 
-  localStorage.setItem('access_token', access)
-  localStorage.setItem('refresh_token', refresh)
+        const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
 
-  const lastVisitedPage = localStorage.getItem('lastVisitedPage') || '/'
+        router.push(lastVisitedPage)
 
-  router.push(lastVisitedPage)
-
-  // window.location.href = lastVisitedPage
-  localStorage.removeItem('lastVisitedPage')
-},1000)
+        // window.location.href = lastVisitedPage
+        localStorage.removeItem('lastVisitedPage')
+      }, 1000)
     } catch (error) {
       setLoading(false)
       toast.error(error)
@@ -200,7 +200,7 @@ setTimeout(() => {
               variant='contained'
               type='submit'
               disabled={loading || (!username && !password)}
-              startIcon={loading ? <CircularProgress size={20} color="inherit" /> : null}
+              startIcon={loading ? <CircularProgress size={20} color='inherit' /> : null}
             >
               {loading ? 'Yuklanmoqda...' : 'Kirish'}
             </Button>
@@ -208,14 +208,14 @@ setTimeout(() => {
           <div className='flex flex-col items-start justify-start gap-1'>
             <p>
               Akkauntingiz yo‘qmi?{' '}
-              <Link href="/auth/register" className="underline text-primary">
+              <Link href='/auth/register' className='underline text-primary'>
                 Ro‘yxatdan o‘ting
               </Link>
             </p>
 
             <p>
               Parolni unutdingizmi?{' '}
-              <Link href="/auth/forgot-password" className="underline text-primary">
+              <Link href='/auth/forgot-password' className='underline text-primary'>
                 Tiklash
               </Link>
             </p>
